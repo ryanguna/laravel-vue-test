@@ -45,6 +45,24 @@ LOGIN_ENDPOINT="http://<replace this with the host of your laravel application>/
 CLIENT_ID=2
 CLIENT_SECRET=<Replace this from the client secret you copied earlier>
 
+Configuring Reset Password Mailing Functionality
+
+FRONT_END_MAIL_REDIRECT=http://localhost:8080
+FRONT_END_MAIL_REDIRECT=<Change this to your front end host name>
+  
+We will be using a gmail account for our mail host
+
+
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=<change this with your gmail account username>
+MAIL_PASSWORD=<change this with your gmail account password>
+MAIL_ENCRYPTION=tls
+  
+  
+
 Run 
 php artisan serve
 
@@ -78,9 +96,9 @@ npm install
 
 edit your .env file 
 
-VUE_APP_AXIOS_URL='http://localhost:8000'
+VUE_APP_AXIOS_URL=http://localhost:8000
 
-VUE_APP_AXIOS_URL='http://<Change this ti your laravel host name>'
+VUE_APP_AXIOS_URL=http://<Change this ti your laravel host name>
 
 npm run serve
 
