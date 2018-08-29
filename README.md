@@ -21,19 +21,52 @@ npm install
 
 Laravel
 
-Create .env.example
 
 run
+
 composer install
 
+Create .env file
+Rename .env.example to .env
+
+
 edit .env config
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=<mysql-db>
+DB_USERNAME=<db-username>
+DB_PASSWORD=<db-password>
+
 php artisan key:generate
 php artisan migrate:fresh --seed
+php artisan passport:install
+
+
+
+Copy your client ID 2 and secret credentials that is displayed on your terminal
+
+Example :
+Client ID: 2
+Client Secret: cPwO2B31etecinn264UHwaAdbBMaEOHIwc7r9Jmt
+
+edit .env config lines 
+
+LOGIN_ENDPOINT="http://<replace this with the host of your laravel application>/oauth/token"
+CLIENT_ID=2
+CLIENT_SECRET=<Replace this from the client secret you copied earlier>
+
+Run 
+php artisan serve
+
+If you get welcomed to a laravel homescreen then we are done with installing laravel :)
+
+
+
+Installing vuejs
+
+
 default account will be created
 username : admin@triune.com,
 password : admin
-
-php artisan passport:install
-
-Setup the client secret and client ID in env.
-choose the client ID 2
