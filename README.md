@@ -1,26 +1,14 @@
-#
-Installing vue
+laravel must be installed on your machine
 
-Install vue.js 3
+https://laravel.com/docs/5.6/installation
 
-#WARNING
-The package name changed from vue-cli to @vue/cli. If you have the previous vue-cli (1.x or 2.x) package installed globally, you need to uninstall it first with npm uninstall vue-cli -g
+or laravel homestead must be install 
 
-##
-To install the new package, use one of those commands:
+https://laravel.com/docs/5.6/homestead
 
-sudo npm install -g @vue/cli
-
-##
-You can check you have the right version (3.x) with this command:
-
-vue --version
-
-
-npm install
 
 Laravel
-
+cd to /laravel directory
 
 run
 
@@ -67,6 +55,41 @@ If you get welcomed to a laravel homescreen then we are done with installing lar
 Installing vuejs
 
 
-default account will be created
+#
+Installing vue
+
+Install vue.js 3
+
+#WARNING
+The package name changed from vue-cli to @vue/cli. If you have the previous vue-cli (1.x or 2.x) package installed globally, you need to uninstall it first with npm uninstall vue-cli -g
+
+##
+To install the new package, use one of those commands:
+
+sudo npm install -g @vue/cli
+
+##
+You can check you have the right version (3.x) with this command:
+
+vue --version
+cd to /vue directory
+run
+npm install
+
+edit your .env file 
+
+VUE_APP_AXIOS_URL='http://localhost:8000'
+
+VUE_APP_AXIOS_URL='http://<Change this ti your laravel host name>'
+
+npm run serve
+
+Open your vue application 
+
+Open your provisioned vuejs development server 
+
+and try logging in with these credentials
+
+default account :
 username : admin@triune.com,
 password : admin
