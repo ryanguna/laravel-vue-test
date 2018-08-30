@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
@@ -8,7 +10,7 @@ use App\User;
 use App\UserInformation;
 use Response;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
     public function login(Request $request)
     {
@@ -40,30 +42,6 @@ class AuthController extends Controller
         }
 
     }
-
-    public function signUp(Request $request)
-    {
-        $user = User::where('email', '=', $request->email)->first();
-        if ($user === null) {
-
-            $userCreate = User::create([
-                'email' => $request->email,
-                'password' => bcrypt($request->password)
-            ]);
-
-            if($userCreate->id){
-                UserInformation::create([
-                    'user_id' => $userCreate->id,
-                    'firstname' => $request->firstname,
-                    'lastname' => $request->lastname
-                ]);
-            }
-            return response()->json(['data' => 'User Successfuly Created'], 200);
-        }
-
-        return response()->json(['data' => 'Email already exist'], 409);
-    }
-
 
 
 //    public function googleLogin(Request $request){

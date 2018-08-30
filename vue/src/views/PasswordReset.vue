@@ -72,7 +72,10 @@
             let send = {
               email : self.ruleForm.email
             };
-            self.$http.post('api/password/create', send)
+
+
+
+              self.axios.post('api/password/create', send)
               .then((response) => {
                 console.log('RESPONSE', response);
                 self.$router.push('/login')

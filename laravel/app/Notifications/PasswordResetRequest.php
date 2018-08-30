@@ -36,9 +36,11 @@ class PasswordResetRequest extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $url = url('/api/password/find/'.$this->token);
+        $frontEndMailRedirect = env('FRONT_END_MAIL_REDIRECT');
+
         return (new MailMessage)
-            ->line('You are receiving this email because we        received a password reset request for your account.')
-            ->action('Reset Password', url('http://localhost:8080/resetAccount?token='.$this->token))
+            ->line('You are receiving this email because we received a password reset request for your account.')
+            ->action('Reset Password', url("$frontEndMailRedirect/resetAccount?token=".$this->token))
             ->line('If you did not request a password reset, no further action is required.');
     }
     /**

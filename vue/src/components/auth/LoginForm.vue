@@ -95,7 +95,7 @@
                     username : self.loginForm.email,
                     password : self.loginForm.password,
                 };
-                self.$axios.post('api/login', data)
+                self.$axios.post('api/authentication/login', data)
                     .then((response) => {
                         console.log('RESPONSE', response);
                         self.$auth.setToken(response.data.oauth_token.access_token, response.data.oauth_token.expires_in + Date.now());

@@ -34,12 +34,20 @@ Route::group([
 });
 
 
+Route::group([
+    'namespace' => 'Auth',
+    'middleware' => 'api',
+    'prefix' => 'authentication'
+], function () {
+    Route::post('login', 'LoginController@login');
+    Route::post('signUp', 'SignUpController@signUp');
+});
 
-Route::post('login', 'AuthController@login');
-Route::post('signUp', 'AuthController@signUp');
+
+
 
 //Route::post('password/email', 'Auth\ForgotPasswordController@getResetToken');
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-//Route::post('googleLogin', 'AuthController@googleLogin');
+//Route::post('googleLogin', 'LoginController@googleLogin');
 
