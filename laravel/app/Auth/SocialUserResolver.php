@@ -9,12 +9,11 @@
 namespace App\Auth;
 
 
-use App\Employee;
+use App\UserInformation;
 use App\User;
 use Laravel\Socialite\Facades\Socialite;
 use Adaojunior\Passport\SocialGrantException;
 use Adaojunior\Passport\SocialUserResolverInterface;
-use App\Http\Resources\SocialAccountResource;
 use App\SocialAccount;
 
 
@@ -58,18 +57,18 @@ class SocialUserResolver implements SocialUserResolverInterface
 
 
         /** @var User $model */
-        $employee = Employee::query()->firstOrCreate(['first_name' => $user->user['name']['givenName']], [
-           'last_name' => $user->user['name']['familyName'],
-            'gender' => isset($user->gender) ? ( $user->gender == 'male' ? 1 : 0 ) : 0
+
+        $userAccount = User::query()->firstOrCreate(['email' => $user->email], [
+            'password' => bcrypt('secret'),
         ]);
 
-
-        if($employee) {
-            $userAccount = User::query()->firstOrCreate(['email' => $user->email], [
-                'password' => bcrypt('secret'),
-                'employee_id' => $employee->id,
+        if($userAccount) {
+            $employee = UserInformation::query()->firstOrCreate(['firstname' => $user->user['name']['givenName']], [
+                'lastname' => $user->user['name']['familyName'],
                 'profile_picture' => $user->avatar,
+                'user_id' => $userAccount->id
             ]);
+
 
             $socialAccount = SocialAccount::query()->firstOrCreate(['provider_user_id' => $user->getId(), 'provider' => $network], [
                 'provider' => $network,

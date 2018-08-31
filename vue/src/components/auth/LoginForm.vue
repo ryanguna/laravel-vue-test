@@ -39,7 +39,7 @@
             </el-row>
             <el-row type="flex" class="row-bg" style="margin-top: 10px;">
                 <el-col :span="24">
-                    <el-button type="danger" @click="twitterLogin" class="login-btn">Google</el-button>
+                    <el-button type="danger" @click="googleLogin" class="login-btn">Google</el-button>
                 </el-col>
             </el-row>
         </el-form>
@@ -118,17 +118,20 @@
                         }
                     });
             },
-            twitterLogin(){
+            googleLogin(){
                 const self = this;
-                // let socialLogin = {
-                //     name: 'google'
-                // };
+                let socialLogin = {
+                    name: 'google'
+                };
                 console.log('LOGIN WITH TWITTER!');
-                // self.$http.post(`api/googleLogin`, socialLogin)
-                //     .then(response => {
-                //         console.log('GOOGLE LOGIN RESPONSE ', response.body);
-                //         window.location = response.body;
-                //     })
+                self.$axios.post(`api/authentication/social/oauth/login`, socialLogin)
+                    .then(response => {
+                        window.open(response.data,
+                            'popUpWindow',
+                            'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+                    }).catch(error => {
+                        console.log('ERROR', error);
+                 });
             }
         }
     }

@@ -53,14 +53,14 @@ FRONT_END_MAIL_REDIRECT=<Change this to your front end host name>
 We will be using a gmail account for our mail host
 
 
-
+```
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
 MAIL_USERNAME=<change this with your gmail account username>
 MAIL_PASSWORD=<change this with your gmail account password>
 MAIL_ENCRYPTION=tls
-  
+```  
   
 
 Run 

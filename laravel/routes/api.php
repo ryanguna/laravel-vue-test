@@ -15,8 +15,6 @@ use Illuminate\Http\Request;
 
 
 
-
-
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('user/getCurrentlyLoggedInUser', 'UserController@getCurrentlyLoggedInUser');
     Route::resource('user', 'UserController');
@@ -41,7 +39,13 @@ Route::group([
 ], function () {
     Route::post('login', 'LoginController@login');
     Route::post('signUp', 'SignUpController@signUp');
+
+
+    Route::post('social/oauth/login', 'SocialLoginController@login');
+
+    Route::get('social/oauth/authorize', 'SocialLoginController@googleLoginCallback');
 });
+
 
 
 
@@ -49,5 +53,4 @@ Route::group([
 //Route::post('password/email', 'Auth\ForgotPasswordController@getResetToken');
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-//Route::post('googleLogin', 'LoginController@googleLogin');
 

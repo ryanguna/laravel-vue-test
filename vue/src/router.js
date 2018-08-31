@@ -52,6 +52,13 @@ export default new Router({
             forVisitors : true
         }
     },
+    {
+        path: "/oauth",
+        component: () => import('./views/Oauth.vue'),
+        meta: {
+            forVisitors : true
+        }
+    },
   ]
 
 

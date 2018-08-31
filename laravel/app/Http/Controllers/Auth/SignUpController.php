@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\User;
@@ -12,6 +14,13 @@ class SignUpController extends Controller
 
     public function signUp(Request $request)
     {
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:5',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+        ]);
+
         $user = User::where('email', '=', $request->email)->first();
         if ($user === null) {
 
@@ -29,7 +38,7 @@ class SignUpController extends Controller
             }
             return response()->json(['data' => 'User Successfuly Created'], 200);
         }
-        return response()->json(['data' => 'Email already exist'], 409);
+        return response()->json(['data' => 'Email has already been taken. Please choose another email'], 409);
     }
 
 

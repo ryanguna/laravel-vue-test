@@ -10,7 +10,7 @@
                 <span class="login-title">Signup</span>
               </div>
 
-              <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+              <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
 
                 <el-form-item label="Email"
                               prop="email">
@@ -19,16 +19,20 @@
                     suffix-icon="el-icon-message"
                     v-model="ruleForm.email"
                     auto-complete="off"
+                    @input = "ruleErrorMessage = ''"
                     @keyup.enter.native="login"
                   >
                   </el-input>
+
+                  <div v-show="ruleErrorMessage"  class="el-form-item__error">
+                    {{ ruleErrorMessage }}
+                  </div>
 
                 </el-form-item>
 
 
                 <el-form-item>
                   <el-button type="primary" @click="submitForm('ruleForm')">Reset</el-button>
-                  <el-button @click="resetForm('ruleForm')">Reset</el-button>
                 </el-form-item>
               </el-form>
 
@@ -52,6 +56,8 @@
   export default {
     data() {
       return {
+        loading : false,
+        ruleErrorMessage: '',
         ruleForm: {
           email : '',
         },
@@ -66,23 +72,26 @@
     methods: {
       submitForm(formName) {
         const self = this;
+
+        self.ruleErrorMessage = '';
+
+
         this.$refs[formName].validate((valid) => {
           if (valid) {
-
-            let send = {
-              email : self.ruleForm.email
-            };
-
-
-
-              self.axios.post('api/password/create', send)
+              self.loading = true;
+              self.axios.post('api/password/create', {
+                  email : self.ruleForm.email
+              })
               .then((response) => {
+                  self.loading = false;
                 console.log('RESPONSE', response);
-                self.$router.push('/login')
+                // self.$router.push('/login')
 
               })
               .catch(error => {
-                console.log('ERROR TO', error);
+                  self.loading = false;
+                  self.ruleErrorMessage =   error.response.data.message;
+                console.log('ERROR TO', error.response.data.message);
               });
 
 

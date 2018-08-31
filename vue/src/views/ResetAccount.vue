@@ -56,7 +56,7 @@
     },
     mounted(){
       const self = this;
-      self.$http.get('api/password/find/' + self.$route.query.token)
+      self.$axios.get('api/password/find/' + self.$route.query.token)
         .then((response) => {
           self.ruleForm2.email =  response.body.email;
           console.log('RESPONSE', response);
